@@ -6,6 +6,11 @@ import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
+import { createAuthClient } from "better-auth/client";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+
+const authClient = createAuthClient();
 
 const formSchema = z.object({
   name: z.string("Nome inválido").trim().min(1,"Nome é obrigatório"),
@@ -26,6 +31,7 @@ const formSchema = z.object({
 type FormValues = z.infer<typeof formSchema>;
 
 const SignUpForm = () => { 
+  const router = useRouter();
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),  // TODO: Verificar se é necessário
     defaultValues: {
@@ -36,10 +42,28 @@ const SignUpForm = () => {
     },
   });
 
-  async function onSubmit(data: FormValues){
-    console.log("Formulario Valido e Enviado");
-    console.log(data);
-  };
+  async function onSubmit(values: FormValues){
+ 
+    await authClient.signUp.email({
+      name: values.name,
+      email: values.email, 
+      password: values.password,
+      fetchOptions: {
+        onSuccess: () => {
+          router.push("/");
+        },
+        onError: (error) => {
+          if (error.error.code === "USER_ALREADY_EXISTS") {
+            toast.error("E-mail já cadastrado.");
+            return form.setError("email", {
+              message: "E-mail já cadastrado.",
+            });
+          }
+          toast.error(error.error.message);
+        },
+      }
+    });
+  }
 
   return (
     <>
