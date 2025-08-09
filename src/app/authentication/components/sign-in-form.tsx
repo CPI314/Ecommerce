@@ -103,7 +103,7 @@ const SignInForm = () => {
                 )}
               />
             </CardContent>
-            <CardFooter className="flex flex-call gap-2">
+            <CardFooter className="flex flex-col gap-2 ">
               <Button type="submit" className="w-full">Entrar</Button>
               <Button
                 variant="outline"
