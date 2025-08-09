@@ -1,6 +1,7 @@
 import {desc} from "drizzle-orm";
 import Image from "next/image";
 
+import BrandsList from "@/components/common/brand-list";
 import CategorySelector from "@/components/common/category-selector";
 import Footer from "@/components/common/footer";
 import { Header } from "@/components/common/header";
@@ -35,7 +36,8 @@ const Home = async () => {
             className="h-auto w-full"
           />
         </div>
-
+          <BrandsList title="Marcas Parceiras"/>
+        
         <ProductList product={products} title="Mais vendidos" />
 
         <div className="px-5">
