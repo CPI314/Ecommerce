@@ -1,6 +1,7 @@
-import { productTable, productVariantTable } from "@/db/schema";
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
+
+import { productTable, productVariantTable } from "@/db/schema";
 import { formatCentsToBRL } from "@/helpers/money";
 
 interface ProductItemProps{

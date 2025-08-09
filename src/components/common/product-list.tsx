@@ -1,6 +1,7 @@
 "use client";
 
 import { productTable, productVariantTable } from "@/db/schema";
+
 import ProductItem from "./product-item";
 
 interface ProductListProps{
@@ -10,7 +11,7 @@ interface ProductListProps{
   })[]
 };
 
-const ProductList = async ({title, product}: ProductListProps) => {
+const ProductList =  ({title, product}: ProductListProps) => {
   return(
     <div className="space-y-6">
       <h3 className="px-5 font-semibold">{title}</h3>
