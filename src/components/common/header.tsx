@@ -66,6 +66,13 @@ export const Header = () => {
                       <LogOutIcon />
                     </Button>
                   </div>
+                  <div className="mt-6 w-full">
+                    <Link href="/my-orders/" className="block">
+                      <Button className="w-full" variant="outline" size="lg">
+                        Meus pedidos
+                      </Button>
+                    </Link>
+                  </div>
                 </>
               ) : (
                 <div className="flex items-center justify-between">
